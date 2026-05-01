@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Johnathan Hicks — Healthcare Data Analyst</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --ink: #1a1a18; --ink-soft: #5a5a54; --ink-faint: #9a9a94;
+    --paper: #f7f6f2; --paper-dark: #eeede8;
+    --accent: #2a6b4f; --accent-light: #e8f2ed; --rule: #dddcd6;
+  }
+  html { scroll-behavior: smooth; }
+  body { font-family: 'DM Sans', sans-serif; background: var(--paper); color: var(--ink); font-size: 16px; line-height: 1.6; }
+
+  nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; justify-content: space-between; align-items: center; padding: 1.25rem 4rem; background: rgba(247,246,242,0.92); backdrop-filter: blur(8px); border-bottom: 1px solid var(--rule); }
+  .nav-name { font-family: 'DM Serif Display', serif; font-size: 1.1rem; color: var(--ink); text-decoration: none; }
+  .nav-links { display: flex; gap: 2rem; list-style: none; }
+  .nav-links a { font-size: 0.85rem; font-weight: 500; letter-spacing: 0.06em; text-transform: uppercase; color: var(--ink-soft); text-decoration: none; transition: color 0.2s; }
+  .nav-links a:hover { color: var(--accent); }
+
+  #hero { min-height: 100vh; display: flex; align-items: center; padding: 6rem 4rem 4rem; max-width: 1100px; margin: 0 auto; gap: 4rem; }
+  .hero-text { flex: 1; }
+  .hero-tag { display: inline-block; font-size: 0.75rem; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent); background: var(--accent-light); padding: 0.3rem 0.75rem; border-radius: 2px; margin-bottom: 1.5rem; opacity: 0; animation: fadeUp 0.6s 0.1s forwards; }
+  .hero-name { font-family: 'DM Serif Display', serif; font-size: clamp(2.8rem, 5vw, 4.2rem); line-height: 1.1; color: var(--ink); margin-bottom: 1.25rem; opacity: 0; animation: fadeUp 0.6s 0.2s forwards; }
+  .hero-name em { font-style: italic; color: var(--accent); }
+  .hero-desc { font-size: 1.05rem; color: var(--ink-soft); max-width: 480px; line-height: 1.75; margin-bottom: 2rem; font-weight: 300; opacity: 0; animation: fadeUp 0.6s 0.3s forwards; }
+  .hero-cta { display: inline-flex; align-items: center; gap: 0.5rem; background: var(--accent); color: #fff; font-size: 0.85rem; font-weight: 500; letter-spacing: 0.06em; text-transform: uppercase; padding: 0.85rem 1.75rem; border-radius: 2px; text-decoration: none; transition: background 0.2s, transform 0.2s; opacity: 0; animation: fadeUp 0.6s 0.4s forwards; }
+  .hero-cta:hover { background: #1e5239; transform: translateY(-1px); }
+  .hero-visual { flex: 0 0 320px; opacity: 0; animation: fadeUp 0.6s 0.3s forwards; }
+  .hero-card { background: #fff; border: 1px solid var(--rule); border-radius: 6px; padding: 1.75rem; box-shadow: 0 4px 24px rgba(0,0,0,0.05); }
+  .hero-card-label { font-size: 0.7rem; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-faint); margin-bottom: 1rem; }
+  .stat-row { display: flex; gap: 1rem; margin-bottom: 1.25rem; }
+  .stat { flex: 1; background: var(--paper); border-radius: 4px; padding: 0.85rem; text-align: center; }
+  .stat-num { font-family: 'DM Serif Display', serif; font-size: 1.8rem; color: var(--accent); display: block; }
+  .stat-lbl { font-size: 0.7rem; color: var(--ink-faint); }
+  .skill-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+  .skill-tag { font-size: 0.72rem; font-weight: 500; color: var(--ink-soft); background: var(--paper-dark); padding: 0.25rem 0.65rem; border-radius: 2px; border: 1px solid var(--rule); }
+
+  section { padding: 5rem 4rem; max-width: 1100px; margin: 0 auto; }
+  .section-label { font-size: 0.72rem; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent); margin-bottom: 0.75rem; }
+  .section-title { font-family: 'DM Serif Display', serif; font-size: clamp(1.8rem, 3vw, 2.4rem); color: var(--ink); margin-bottom: 1rem; line-height: 1.2; }
+  hr.rule { border: none; border-top: 1px solid var(--rule); margin-bottom: 3rem; }
+
+  #about { border-top: 1px solid var(--rule); }
+  .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: start; margin-top: 2rem; }
+  .about-body { font-size: 1rem; color: var(--ink-soft); line-height: 1.85; font-weight: 300; }
+  .about-body p + p { margin-top: 1rem; }
+  .about-highlights { display: flex; flex-direction: column; gap: 1rem; }
+  .highlight { display: flex; align-items: flex-start; gap: 0.75rem; padding: 1rem 1.25rem; background: #fff; border: 1px solid var(--rule); border-radius: 4px; }
+  .highlight-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--accent); margin-top: 0.35rem; flex-shrink: 0; }
+  .highlight-text { font-size: 0.9rem; color: var(--ink-soft); line-height: 1.5; }
+  .highlight-text strong { color: var(--ink); font-weight: 500; }
+
+  #projects { border-top: 1px solid var(--rule); }
+  .projects-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem; margin-top: 2rem; }
+  .project-card { background: #fff; border: 1px solid var(--rule); border-radius: 6px; padding: 1.75rem; transition: box-shadow 0.2s, transform 0.2s; }
+  .project-card:hover { box-shadow: 0 8px 32px rgba(0,0,0,0.08); transform: translateY(-2px); }
+  .project-type { font-size: 0.68rem; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent); margin-bottom: 0.75rem; }
+  .project-title { font-family: 'DM Serif Display', serif; font-size: 1.2rem; color: var(--ink); margin-bottom: 0.6rem; line-height: 1.3; }
+  .project-desc { font-size: 0.88rem; color: var(--ink-soft); line-height: 1.65; margin-bottom: 1.25rem; font-weight: 300; }
+  .project-footer { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.5rem; }
+  .project-tools { display: flex; gap: 0.4rem; flex-wrap: wrap; }
+  .project-tool { font-size: 0.68rem; font-weight: 500; background: var(--paper-dark); color: var(--ink-faint); padding: 0.2rem 0.55rem; border-radius: 2px; }
+  .project-link { font-size: 0.78rem; font-weight: 500; color: var(--accent); text-decoration: none; letter-spacing: 0.04em; display: flex; align-items: center; gap: 0.3rem; transition: gap 0.2s; }
+  .project-link:hover { gap: 0.5rem; }
+
+  #contact { border-top: 1px solid var(--rule); }
+  .contact-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: start; margin-top: 2rem; }
+  .contact-body { font-size: 1rem; color: var(--ink-soft); line-height: 1.85; font-weight: 300; }
+  .contact-links { display: flex; flex-direction: column; gap: 0.85rem; }
+  .contact-link { display: flex; align-items: center; gap: 0.85rem; padding: 1rem 1.25rem; background: #fff; border: 1px solid var(--rule); border-radius: 4px; text-decoration: none; color: var(--ink); font-size: 0.9rem; transition: border-color 0.2s, color 0.2s; }
+  .contact-link:hover { border-color: var(--accent); color: var(--accent); }
+  .contact-icon { font-size: 1rem; width: 20px; text-align: center; }
+
+  footer { border-top: 1px solid var(--rule); padding: 2rem 4rem; display: flex; justify-content: space-between; align-items: center; max-width: 1100px; margin: 0 auto; }
+  footer p { font-size: 0.8rem; color: var(--ink-faint); }
+
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: translateY(0); } }
+
+  @media (max-width: 768px) {
+    nav { padding: 1rem 1.5rem; }
+    .nav-links { gap: 1.25rem; }
+    #hero { flex-direction: column; padding: 5rem 1.5rem 3rem; gap: 2rem; }
+    .hero-visual { flex: none; width: 100%; }
+    section { padding: 3.5rem 1.5rem; }
+    .about-grid, .contact-inner { grid-template-columns: 1fr; gap: 2rem; }
+    footer { flex-direction: column; gap: 0.5rem; text-align: center; padding: 1.5rem; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a class="nav-name" href="#hero">Johnathan Hicks</a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<div id="hero">
+  <div class="hero-text">
+    <span class="hero-tag">Healthcare Data Analyst</span>
+    <h1 class="hero-name">Turning clinical<br>data into <em>clarity.</em></h1>
+    <p class="hero-desc">I combine hands-on experience inside UCLA Health with data analytics skills to help healthcare organizations make smarter, faster decisions.</p>
+    <a href="#projects" class="hero-cta">View My Work →</a>
+  </div>
+  <div class="hero-visual">
+    <div class="hero-card">
+      <div class="hero-card-label">At a glance</div>
+      <div class="stat-row">
+        <div class="stat"><span class="stat-num">6</span><span class="stat-lbl">Projects</span></div>
+        <div class="stat"><span class="stat-num">3+</span><span class="stat-lbl">Tools</span></div>
+        <div class="stat"><span class="stat-num">UCLA</span><span class="stat-lbl">Health</span></div>
+      </div>
+      <div class="skill-tags">
+        <span class="skill-tag">SQL</span>
+        <span class="skill-tag">Tableau</span>
+        <span class="skill-tag">Excel</span>
+        <span class="skill-tag">Google Analytics Cert.</span>
+        <span class="skill-tag">Healthcare Ops</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<section id="about">
+  <div class="section-label">About Me</div>
+  <h2 class="section-title">Healthcare experience.<br>Analytical mindset.</h2>
+  <hr class="rule">
+  <div class="about-grid">
+    <div class="about-body">
+      <p>I'm a data-driven analyst with a background in healthcare administration at UCLA Health's Dermatology clinic — one of the country's top academic medical centers. Throughout my career I've been drawn to problem-solving: finding patterns, identifying inefficiencies, and uncovering the "why" behind processes.</p>
+      <p>When I discovered data analytics, I knew it was the perfect field to combine that curiosity with my passion for optimization. I bring domain knowledge that most analysts simply don't have, alongside hands-on skills in SQL, Tableau, and Excel — and I'm actively seeking opportunities where I can make a meaningful impact.</p>
+    </div>
+    <div class="about-highlights">
+      <div class="highlight">
+        <div class="highlight-dot"></div>
+        <div class="highlight-text"><strong>UCLA Health — Dermatology Clinic</strong><br>Streamlined physician-patient communication workflows, maintaining 95% inquiry resolution within 24 hours.</div>
+      </div>
+      <div class="highlight">
+        <div class="highlight-dot"></div>
+        <div class="highlight-text"><strong>Google Data Analytics Certificate</strong><br>Coursera — covering data cleaning, analysis, visualization, and storytelling.</div>
+      </div>
+      <div class="highlight">
+        <div class="highlight-dot"></div>
+        <div class="highlight-text"><strong>Data Analytics Accelerator Bootcamp</strong><br>Deepening real-world analytics skills through hands-on project work.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="projects">
+  <div class="section-label">Work</div>
+  <h2 class="section-title">Selected Projects</h2>
+  <hr class="rule">
+  <div class="projects-grid">
+
+    <div class="project-card">
+      <div class="project-type">SQL · Healthcare</div>
+      <div class="project-title">Healthcare Billing Analysis</div>
+      <div class="project-desc">Analyzed billing patterns across hospitals, insurance providers, and medical conditions to surface cost drivers. Found that Medicare carried the highest average billing costs, and that conditions like obesity and diabetes were associated with the steepest charges — providing actionable insights for healthcare administrators.</div>
+      <div class="project-footer">
+        <div class="project-tools"><span class="project-tool">SQL</span></div>
+        <a href="https://github.com/Honjicks/HealthCare_Data" target="_blank" class="project-link">View on GitHub →</a>
+      </div>
+    </div>
+
+    <div class="project-card">
+      <div class="project-type">SQL · Data Cleaning</div>
+      <div class="project-title">Nashville Housing Data Cleaning</div>
+      <div class="project-desc">Transformed a raw Nashville real estate dataset into a clean, analysis-ready format using SQL. Standardized address fields, normalized binary values, removed duplicate records, and improved overall data integrity — laying the groundwork for reliable downstream reporting.</div>
+      <div class="project-footer">
+        <div class="project-tools"><span class="project-tool">SQL</span></div>
+        <a href="https://github.com/Honjicks/DataCleaning_SQL" target="_blank" class="project-link">View on GitHub →</a>
+      </div>
+    </div>
+
+    <div class="project-card">
+      <div class="project-type">SQL + Tableau · Public Health</div>
+      <div class="project-title">COVID-19 Global Data Analysis</div>
+      <div class="project-desc">Examined global COVID-19 death rates per population alongside vaccination rates to assess pandemic severity and country-level response. Combined SQL for data transformation with a Tableau dashboard to deliver clear, data-backed insights for public health storytelling.</div>
+      <div class="project-footer">
+        <div class="project-tools"><span class="project-tool">SQL</span><span class="project-tool">Tableau</span></div>
+        <a href="https://public.tableau.com/shared/3WFP56M72?:display_count=n&:origin=viz_share_link" target="_blank" class="project-link">View Dashboard →</a>
+      </div>
+    </div>
+
+    <div class="project-card">
+      <div class="project-type">Tableau · Real Estate</div>
+      <div class="project-title">Airbnb Market Analysis</div>
+      <div class="project-desc">Built an interactive Tableau dashboard exploring Airbnb pricing and availability trends. Visualized key metrics across neighborhoods and property types to help stakeholders understand market dynamics and identify pricing opportunities.</div>
+      <div class="project-footer">
+        <div class="project-tools"><span class="project-tool">Tableau</span></div>
+        <a href="https://public.tableau.com/app/profile/johnathan.h6637/viz/AirBnBProject_16738243031390/Dashboard1" target="_blank" class="project-link">View Dashboard →</a>
+      </div>
+    </div>
+
+    <div class="project-card">
+      <div class="project-type">Tableau · Workforce Analytics</div>
+      <div class="project-title">Data Science Salaries Dashboard</div>
+      <div class="project-desc">Designed a Tableau dashboard analyzing data science compensation trends across roles, experience levels, and geographies. A useful reference for professionals navigating the analytics job market and understanding where salary opportunities are strongest.</div>
+      <div class="project-footer">
+        <div class="project-tools"><span class="project-tool">Tableau</span></div>
+        <a href="https://public.tableau.com/app/profile/johnathan.h6637/viz/DataScienceSalaries_16841898222900/Dashboard1" target="_blank" class="project-link">View Dashboard →</a>
+      </div>
+    </div>
+
+    <div class="project-card">
+      <div class="project-type">Excel · Sales Analytics</div>
+      <div class="project-title">Bike Sales Dashboard</div>
+      <div class="project-desc">Developed an interactive Excel dashboard to uncover customer purchasing behavior across demographics including income, marital status, education level, and region. Delivered clear visualizations that enable stakeholders to identify high-value customer segments and regional sales trends.</div>
+      <div class="project-footer">
+        <div class="project-tools"><span class="project-tool">Excel</span></div>
+        <a href="https://github.com/Honjicks/Excel_BikeSales_Dashboard" target="_blank" class="project-link">View on GitHub →</a>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<section id="contact">
+  <div class="section-label">Contact</div>
+  <h2 class="section-title">Let's connect.</h2>
+  <hr class="rule">
+  <div class="contact-inner">
+    <div class="contact-body">
+      I'm actively seeking data analyst opportunities in healthcare and health tech. If you're working on something interesting, looking to collaborate, or want to discuss opportunities — feel free to reach out.
+    </div>
+    <div class="contact-links">
+      <!-- UPDATE: Replace with your real email address -->
+      <a href="mailto:your@email.com" class="contact-link">
+        <span class="contact-icon">✉</span> your@email.com
+      </a>
+      <a href="https://linkedin.com/in/hicksjohnathanw" target="_blank" class="contact-link">
+        <span class="contact-icon">in</span> linkedin.com/in/hicksjohnathanw
+      </a>
+      <a href="https://github.com/Honjicks" target="_blank" class="contact-link">
+        <span class="contact-icon">⌥</span> github.com/Honjicks
+      </a>
+      <a href="https://public.tableau.com/app/profile/johnathan.h6637/vizzes" target="_blank" class="contact-link">
+        <span class="contact-icon">◈</span> Tableau Public Profile
+      </a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p>© 2026 Johnathan Hicks · Healthcare Data Analyst</p>
+  <p>Open to new opportunities.</p>
+</footer>
+
+</body>
+</html>
